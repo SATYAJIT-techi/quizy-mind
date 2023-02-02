@@ -1,29 +1,92 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import Result from './result';
 
 const Quiz = ({navigation}) => {
-    const[question, setQuestion] = useState([]);
-    const getQuiz = async() =>{
-    const url ='https://opentdb.com/api.php?amount=3&category=18&difficulty=medium&type=multiple';
-    const res = await fetch(url)
-    const data = await res.json();
-    setQuestion(data.results);
-};
-useEffect(()=>{
-    getQuiz();
-},[]);
+    const [question, setQuestion] = useState(0);
+//     const getQuiz = async() =>{
+//     const url ='https://opentdb.com/api.php?amount=3&category=18&difficulty=medium&type=multiple';
+//     const res = await fetch(url)
+//     const data = await res.json();
+  
+// };
+// useEffect(()=>{
+//     getQuiz();
+// },[]);
   return (
     <View style={styles.container}>
-    {question &&(
+    {/* {question &&( */}
     <View style={styles.parent}>
+        <ScrollView>
       <View style={styles.question}>
-        <Text style={styles.showquestion}> Q. This the questions</Text>
+        <Text style={styles.showquestion}>All of the following programs are classified as raster graphics editors EXCEPT:</Text>
+      </View>
+
+
+      <View style={styles.options}>
+        <TouchableOpacity style={styles.option1} onPress= {()=>setQuestion(question+1)}>
+            <Text>Inkscape</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option2}>
+            <Text> Paint.NET</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option3}>
+            <Text> GIMP</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option4}>
+            <Text> Adobe Photoshop</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.question}>
+        <Text style={styles.showquestion}>Laserjet and inkjet printers are both examples of what type of printer?</Text>
+      </View>
+
+
+      <View style={styles.options}>
+        <TouchableOpacity style={styles.option1} onPress= {()=>setQuestion(question+1)}>
+            <Text>Non-impact printer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option2}>
+            <Text> Impact printer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option3}>
+            <Text> Daisywheel printer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option4}>
+            <Text>Dot matrix printer</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.question}>
+        <Text style={styles.showquestion}>In programming, what do you call functions with the same name but different implementations?</Text>
+      </View>
+
+
+      <View style={styles.options}>
+        <TouchableOpacity style={styles.option1} onPress= {()=>setQuestion(question+1)}>
+            <Text>Overloading</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option2}>
+            <Text> Overriding</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option3}>
+            <Text> Overriding</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option4}>
+            <Text>Inheriting</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* <View style={styles.question}>
+        <Text style={styles.showquestion}>Questions Here</Text>
       </View>
 
 
       <View style={styles.options}>
         <TouchableOpacity style={styles.option1}>
-            <Text> option 1</Text>
+            <Text>option1</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option2}>
             <Text> option 2</Text>
@@ -34,7 +97,10 @@ useEffect(()=>{
         <TouchableOpacity style={styles.option4}>
             <Text> option 4</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
+
+      </ScrollView>
+      <Text>{question}</Text>
 
 
       <View style={styles.nextquestion}>
@@ -44,12 +110,14 @@ useEffect(()=>{
         <TouchableOpacity style={styles.nextbutton}onPress={()=>navigation.navigate("Result")}>
             <Text style={styles.nexttext}> NEXT </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.finishbutton}onPress={()=>navigation.navigate("Result")}>
+        <TouchableOpacity style={styles.finishbutton}onPress={()=>navigation.navigate("Result",{
+            name:question,
+        })}>
             <Text style={styles.finishtext}> Finish Test </Text>
         </TouchableOpacity>
       </View>
       </View>
-    )}  
+    
     </View>
   )
 }
@@ -140,7 +208,8 @@ const styles = StyleSheet.create({
         color:'white',
     },
     showquestion:{
-        fontSize:25,
+        marginHorizontal:20,
+        fontSize:20,
         alignItems:'center',
         
     },

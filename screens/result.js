@@ -1,17 +1,18 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 
-const Result = ({navigation}) => {
+const Result = ({navigation, route}) => {
   return (
     <View>
       <View>
         <Text> Exams Over enjoyy </Text>
-
+        <Text style={{fontSize:20, margin:50}}> You score {route.params.name}/3 </Text>
       </View>
-        <View style={styles.photo}>
+      
+      <View style={styles.photo}>
             <Image  style={styles.photos} source={require('../assets/result.png')} />
-        </View>
+      </View>
         
         <View style={styles.returnhome}>
         <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Home")}>
